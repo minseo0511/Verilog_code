@@ -37,7 +37,8 @@ module tb_SPI_Master ();
         .SCLK(SCLK),
         .MOSI(MOSI),
         .MISO(MISO),
-        .SS(SS)
+        .SS(SS),
+        .done(done)
     );
 
     always #5 clk = ~clk;
