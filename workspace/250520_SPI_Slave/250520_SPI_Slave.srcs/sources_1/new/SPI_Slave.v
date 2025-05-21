@@ -52,7 +52,7 @@ module SPI_Slave_Intf (
     // SPI signals
     input        SCLK,
     input        MOSI,
-    output       reg MISO,
+    output       MISO,
     input        SS,
     //internal signals
     output [7:0] si_data,
@@ -137,15 +137,15 @@ module SPI_Slave_Intf (
     end
 
     // Slave Output Circuit(MISO)
-    localparam SO_IDLE = 0, SO_PHASE = 1;
+    localparam SO_IDLE = 0, SO_WAIT = 1, SO_PHASE = 2;
 
-    reg so_state, so_state_next;
+    reg [1:0] so_state, so_state_next;
     reg [7:0] so_data_reg, so_data_next;
     reg [2:0] so_bit_cnt_reg, so_bit_cnt_next;
     reg so_done_reg, so_done_next;
 
     assign so_done = so_done_reg;
-    // assign MISO = ~SS ? so_data_reg[7] : 1'bz;
+    assign MISO = ~SS ? so_data_reg[7] : 1'bz;
 
     always @(posedge clk, posedge reset) begin
         if (reset) begin
@@ -170,15 +170,18 @@ module SPI_Slave_Intf (
             SO_IDLE: begin
                 if (!SS && so_start) begin
                     so_bit_cnt_next = 0;
-                    so_data_next    = so_data;
-                    so_state_next   = SO_PHASE;
+                    so_state_next   = SO_WAIT;
                 end
+            end
+            SO_WAIT: begin
+                so_data_next    = so_data;
+                so_state_next = SO_PHASE;
             end
             SO_PHASE: begin
                 if (!SS) begin
+                    // MISO = so_data_next[7];
                     if (sclk_falling) begin
                         so_data_next = {so_data_reg[6:0], 1'b0};
-                        MISO = so_data_next[7];
                         if (so_bit_cnt_reg == 7) begin
                             so_done_next    = 1'b1;
                             so_bit_cnt_next = 0;

@@ -10,7 +10,7 @@ module SPI_Master (
     input            start,
     input      [7:0] tx_data,
     output     [7:0] rx_data,
-    output reg       done,
+    output           done,
     output reg       ready,
     //external port
     output           SCLK,
@@ -25,6 +25,9 @@ module SPI_Master (
     reg [7:0] temp_rx_data_next, temp_rx_data_reg;
     reg [$clog2(50)-1:0] sclk_counter_next, sclk_counter_reg;
     reg [$clog2(7)-1:0] bit_counter_next, bit_counter_reg;
+
+    reg done_reg, done_next;
+
     wire r_sclk;
 
     assign MOSI = temp_tx_data_reg[7];
@@ -33,6 +36,7 @@ module SPI_Master (
     assign r_sclk = (state_next == CP1 && ~cpha) || (state_next == CP0 && cpha);
     assign SCLK = cpol ? ~r_sclk : r_sclk;
 
+    assign done = done_reg;
 
     always @(posedge clk, posedge reset) begin
         if (reset) begin
@@ -41,12 +45,14 @@ module SPI_Master (
             temp_rx_data_reg <= 0;
             sclk_counter_reg <= 0;
             bit_counter_reg <= 0;
+            done_reg <= 0;
         end else begin
             state <= state_next;
             temp_tx_data_reg <= temp_tx_data_next;
             temp_rx_data_reg <= temp_rx_data_next;
             sclk_counter_reg <= sclk_counter_next;
             bit_counter_reg <= bit_counter_next;
+            done_reg <= done_next;
         end
     end
 
@@ -55,14 +61,14 @@ module SPI_Master (
         temp_tx_data_next = temp_tx_data_reg;
         temp_rx_data_next = temp_rx_data_reg;
         ready             = 0;
-        done              = 0;
+        done_next              = 0;
         // r_sclk            = 0;
         sclk_counter_next = sclk_counter_reg;
         bit_counter_next  = bit_counter_reg;
         case (state)
             IDLE: begin
-                temp_tx_data_next = 0;
-                done              = 0;
+                temp_rx_data_next = 0;
+                done_next              = 0;
                 ready             = 1;
                 if (start) begin
                     temp_tx_data_next = tx_data;
@@ -95,7 +101,7 @@ module SPI_Master (
                 // r_sclk = 1;
                 if (sclk_counter_reg == 49) begin
                     if (bit_counter_reg == 7) begin
-                        done       = 1;
+                        done_next       = 1;
                         state_next = IDLE;
                     end else begin
                         temp_tx_data_next = {temp_tx_data_reg[6:0], 1'b0};

@@ -122,11 +122,13 @@ module tb_SPI_Master ();
         start = 0;
         wait(done == 1);
         @(posedge clk);
+        @(posedge clk);
         for(int i=0;i<4;i=i+1) begin
             tx_data = 8'b00000000; start = 1; 
             @(posedge clk);
             start = 0;
             wait(done == 1);
+            @(posedge clk);    
             @(posedge clk);    
         end
 
