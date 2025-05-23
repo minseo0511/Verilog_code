@@ -9,8 +9,8 @@ create_clock -add -name sys_clk_pin -period 10.00 -waveform {0 5} [get_ports sys
 
 
 ## Switches
-# set_property -dict { PACKAGE_PIN V17   IOSTANDARD LVCMOS33 } [get_ports {swtich[0]}]
-# set_property -dict { PACKAGE_PIN V16   IOSTANDARD LVCMOS33 } [get_ports {swtich[1]}]
+set_property -dict { PACKAGE_PIN V17   IOSTANDARD LVCMOS33 } [get_ports {GPIOA_tri_io[0]}]
+# set_property -dict { PACKAGE_PIN V16   IOSTANDARD LVCMOS33 } [get_ports {sw[1]}]
 # set_property -dict { PACKAGE_PIN W16   IOSTANDARD LVCMOS33 } [get_ports {swtich[2]}]
 # set_property -dict { PACKAGE_PIN W17   IOSTANDARD LVCMOS33 } [get_ports {swtich[3]}]
 # set_property -dict { PACKAGE_PIN W15   IOSTANDARD LVCMOS33 } [get_ports {swtich[4]}]
@@ -75,8 +75,8 @@ set_property -dict { PACKAGE_PIN J1   IOSTANDARD LVCMOS33 } [get_ports MOSI];#Sc
 set_property -dict { PACKAGE_PIN L2   IOSTANDARD LVCMOS33 } [get_ports MISO];#Sch name = JA2
 set_property -dict { PACKAGE_PIN J2   IOSTANDARD LVCMOS33 } [get_ports SCLK];#Sch name = JA3
 set_property -dict { PACKAGE_PIN G2   IOSTANDARD LVCMOS33 } [get_ports done];#Sch name = JA4
-set_property -dict { PACKAGE_PIN H1   IOSTANDARD LVCMOS33 } [get_ports CS[0]];#Sch name = JA7
-set_property -dict { PACKAGE_PIN K2   IOSTANDARD LVCMOS33 } [get_ports CS[1]];#Sch name = JA8
+set_property -dict { PACKAGE_PIN H1   IOSTANDARD LVCMOS33 } [get_ports GPIOA_tri_io[1]];#Sch name = JA7
+# set_property -dict { PACKAGE_PIN K2   IOSTANDARD LVCMOS33 } [get_ports CS[1]];#Sch name = JA8
 #set_property -dict { PACKAGE_PIN H2   IOSTANDARD LVCMOS33 } [get_ports {JA[6]}];#Sch name = JA9
 #set_property -dict { PACKAGE_PIN G3   IOSTANDARD LVCMOS33 } [get_ports dht_IO];#Sch name = JA10
 

@@ -23,8 +23,9 @@ module SPI_Master #(
     output     [1:0] CS
 );
 
-    reg [1:0] cs_reg;
-    assign CS = cs_reg;
+    // reg [1:0] cs_reg;
+    // assign CS = cs_reg;
+    assign CS = ~sw;
 
     localparam IDLE = 0, CP_DELAY = 1, CP0 = 2, CP1 = 3;
 
@@ -64,7 +65,7 @@ module SPI_Master #(
         temp_rx_data_next = temp_rx_data_reg;
         ready             = 0;
         done              = 0;
-        cs_reg            = {SLAVE_CS{1'b1}};
+        // cs_reg            = {SLAVE_CS{1'b1}};
         // r_sclk            = 0;
         sclk_counter_next = sclk_counter_reg;
         bit_counter_next  = bit_counter_reg;
@@ -73,18 +74,18 @@ module SPI_Master #(
                 temp_tx_data_next = 0;
                 done              = 0;
                 ready             = 1;
-                cs_reg[slave_sel] = 1'b1;
+                // cs_reg[slave_sel] = 1'b1;
                 if (start) begin
                     temp_tx_data_next = tx_data;
                     ready             = 0;
                     sclk_counter_next = 0;
                     bit_counter_next  = 0;
-                    cs_reg[slave_sel] = 1'b0;
+                    // cs_reg[slave_sel] = 1'b0;
                     state_next        = cpha ? CP_DELAY : CP0;
                 end
             end
             CP_DELAY: begin
-                cs_reg[slave_sel] = 1'b0;
+                // cs_reg[slave_sel] = 1'b0;
                 if (sclk_counter_reg == 49) begin
                     sclk_counter_next = 0;
                     state_next = CP0;
@@ -94,7 +95,7 @@ module SPI_Master #(
             end
             CP0: begin
                 // r_sclk = 0;
-                cs_reg[slave_sel] = 1'b0;
+                // cs_reg[slave_sel] = 1'b0;
                 if (sclk_counter_reg == 49) begin
                     temp_rx_data_next = {temp_rx_data_reg[6:0], MISO};
                     sclk_counter_next = 0;
@@ -105,7 +106,7 @@ module SPI_Master #(
             end
             CP1: begin
                 // r_sclk = 1;
-                cs_reg[slave_sel] = 1'b0;
+                // cs_reg[slave_sel] = 1'b0;
                 if (sclk_counter_reg == 49) begin
                     if (bit_counter_reg == 7) begin
                         done       = 1;
