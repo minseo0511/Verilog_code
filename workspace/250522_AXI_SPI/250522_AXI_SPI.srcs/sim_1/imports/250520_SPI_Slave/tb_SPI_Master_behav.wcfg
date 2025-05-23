@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="tb_SPI_Master_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="tb_SPI_Master" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="43095000fs"></ZoomStartTime>
+      <ZoomEndTime time="68935001fs"></ZoomEndTime>
+      <Cursor1Time time="56295000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="276"></NameColumnWidth>
+      <ValueColumnWidth column_width="100"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="32" />
+   <wvobject fp_name="/tb_SPI_Master/clk" type="logic">
+      <obj_property name="ElementShortName">clk</obj_property>
+      <obj_property name="ObjectShortName">clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_SPI_Master/reset" type="logic">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_SPI_Master/start" type="logic">
+      <obj_property name="ElementShortName">start</obj_property>
+      <obj_property name="ObjectShortName">start</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_SPI_Master/U_SPI_Master/state" type="array">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">state[1:0]</obj_property>
+      <obj_property name="ObjectShortName">state[1:0]</obj_property>
+      <obj_property name="label">master_state[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_SPI_Master/tx_data" type="array">
+      <obj_property name="ElementShortName">tx_data[7:0]</obj_property>
+      <obj_property name="ObjectShortName">tx_data[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_SPI_Master/rx_data" type="array">
+      <obj_property name="ElementShortName">rx_data[7:0]</obj_property>
+      <obj_property name="ObjectShortName">rx_data[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_SPI_Master/U_SPI_Master/temp_tx_data_reg" type="array">
+      <obj_property name="ElementShortName">temp_tx_data_reg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">temp_tx_data_reg[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_SPI_Master/U_SPI_Master/temp_rx_data_reg" type="array">
+      <obj_property name="ElementShortName">temp_rx_data_reg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">temp_rx_data_reg[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_SPI_Master/done" type="logic">
+      <obj_property name="ElementShortName">done</obj_property>
+      <obj_property name="ObjectShortName">done</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_SPI_Master/ready" type="logic">
+      <obj_property name="ElementShortName">ready</obj_property>
+      <obj_property name="ObjectShortName">ready</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_SPI_Master/SCLK" type="logic">
+      <obj_property name="ElementShortName">SCLK</obj_property>
+      <obj_property name="ObjectShortName">SCLK</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_SPI_Master/MOSI" type="logic">
+      <obj_property name="ElementShortName">MOSI</obj_property>
+      <obj_property name="ObjectShortName">MOSI</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_SPI_Master/MISO" type="logic">
+      <obj_property name="ElementShortName">MISO</obj_property>
+      <obj_property name="ObjectShortName">MISO</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_SPI_Master/cpol" type="logic">
+      <obj_property name="ElementShortName">cpol</obj_property>
+      <obj_property name="ObjectShortName">cpol</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_SPI_Master/cpha" type="logic">
+      <obj_property name="ElementShortName">cpha</obj_property>
+      <obj_property name="ObjectShortName">cpha</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_SPI_Master/SS" type="logic">
+      <obj_property name="ElementShortName">SS</obj_property>
+      <obj_property name="ObjectShortName">SS</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_SPI_Master/U_SPI_Slave/U_SPI_Slave_Reg/slv_reg0" type="array">
+      <obj_property name="ElementShortName">slv_reg0[7:0]</obj_property>
+      <obj_property name="ObjectShortName">slv_reg0[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_SPI_Master/U_SPI_Slave/U_SPI_Slave_Reg/slv_reg1" type="array">
+      <obj_property name="ElementShortName">slv_reg1[7:0]</obj_property>
+      <obj_property name="ObjectShortName">slv_reg1[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_SPI_Master/U_SPI_Slave/U_SPI_Slave_Reg/slv_reg2" type="array">
+      <obj_property name="ElementShortName">slv_reg2[7:0]</obj_property>
+      <obj_property name="ObjectShortName">slv_reg2[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_SPI_Master/U_SPI_Slave/U_SPI_Slave_Reg/slv_reg3" type="array">
+      <obj_property name="ElementShortName">slv_reg3[7:0]</obj_property>
+      <obj_property name="ObjectShortName">slv_reg3[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_SPI_Master/U_SPI_Slave/U_SPI_Slave_Reg/state" type="array">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">state[1:0]</obj_property>
+      <obj_property name="ObjectShortName">state[1:0]</obj_property>
+      <obj_property name="label">slv_intf_state[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_SPI_Master/U_SPI_Slave/U_SPI_Slave_Intf/si_state" type="logic">
+      <obj_property name="ElementShortName">si_state</obj_property>
+      <obj_property name="ObjectShortName">si_state</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_SPI_Master/U_SPI_Slave/U_SPI_Slave_Intf/so_data" type="array">
+      <obj_property name="ElementShortName">so_data[7:0]</obj_property>
+      <obj_property name="ObjectShortName">so_data[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_SPI_Master/U_SPI_Slave/U_SPI_Slave_Intf/so_data_next" type="array">
+      <obj_property name="ElementShortName">so_data_next[7:0]</obj_property>
+      <obj_property name="ObjectShortName">so_data_next[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_SPI_Master/U_SPI_Slave/U_SPI_Slave_Intf/so_data_reg" type="array">
+      <obj_property name="ElementShortName">so_data_reg[7:0]</obj_property>
+      <obj_property name="ObjectShortName">so_data_reg[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_SPI_Master/U_SPI_Slave/so_start" type="logic">
+      <obj_property name="ElementShortName">so_start</obj_property>
+      <obj_property name="ObjectShortName">so_start</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_SPI_Master/U_SPI_Slave/so_done" type="logic">
+      <obj_property name="ElementShortName">so_done</obj_property>
+      <obj_property name="ObjectShortName">so_done</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_SPI_Master/U_SPI_Slave/U_SPI_Slave_Intf/so_state" type="array">
+      <obj_property name="ElementShortName">so_state[1:0]</obj_property>
+      <obj_property name="ObjectShortName">so_state[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_SPI_Master/U_SPI_Slave/U_SPI_Slave_Reg/addr_reg" type="array">
+      <obj_property name="ElementShortName">addr_reg[1:0]</obj_property>
+      <obj_property name="ObjectShortName">addr_reg[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_SPI_Master/U_SPI_Slave/U_SPI_Slave_Intf/sclk_rising" type="logic">
+      <obj_property name="ElementShortName">sclk_rising</obj_property>
+      <obj_property name="ObjectShortName">sclk_rising</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_SPI_Master/U_SPI_Slave/U_SPI_Slave_Intf/sclk_falling" type="logic">
+      <obj_property name="ElementShortName">sclk_falling</obj_property>
+      <obj_property name="ObjectShortName">sclk_falling</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_SPI_Master/U_SPI_Slave/U_SPI_Slave_Intf/so_bit_cnt_reg" type="array">
+      <obj_property name="ElementShortName">so_bit_cnt_reg[2:0]</obj_property>
+      <obj_property name="ObjectShortName">so_bit_cnt_reg[2:0]</obj_property>
+   </wvobject>
+</wave_config>

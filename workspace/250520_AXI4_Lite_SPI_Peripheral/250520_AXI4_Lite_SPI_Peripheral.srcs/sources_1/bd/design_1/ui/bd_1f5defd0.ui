@@ -5,40 +5,44 @@
    "ExpandedHierarchyInLayout":"",
    "guistr":"# # String gsaved with Nlview 7.0r6  2020-01-29 bk=1.5227 VDI=41 GEI=36 GUI=JA:10.0 non-TLS
 #  -string -flagsOSRD
-preplace port usb_uart -pg 1 -lvl 6 -x 1670 -y 300 -defaultsOSRD
-preplace port sys_clock -pg 1 -lvl 0 -x 0 -y 600 -defaultsOSRD
-preplace port reset -pg 1 -lvl 0 -x 0 -y 520 -defaultsOSRD
-preplace port MOSI -pg 1 -lvl 6 -x 1670 -y 170 -defaultsOSRD
-preplace port SCLK -pg 1 -lvl 6 -x 1670 -y 150 -defaultsOSRD
-preplace port MISO -pg 1 -lvl 0 -x 0 -y 150 -defaultsOSRD
+preplace port usb_uart -pg 1 -lvl 6 -x 1700 -y 300 -defaultsOSRD
+preplace port sys_clock -pg 1 -lvl 0 -x -10 -y 600 -defaultsOSRD
+preplace port reset -pg 1 -lvl 0 -x -10 -y 520 -defaultsOSRD
+preplace port MOSI -pg 1 -lvl 6 -x 1700 -y 130 -defaultsOSRD
+preplace port SCLK -pg 1 -lvl 6 -x 1700 -y 150 -defaultsOSRD
+preplace port MISO -pg 1 -lvl 0 -x -10 -y 150 -defaultsOSRD
+preplace port done -pg 1 -lvl 6 -x 1700 -y 170 -defaultsOSRD
+preplace portBus CS -pg 1 -lvl 6 -x 1700 -y 190 -defaultsOSRD
 preplace inst microblaze_0 -pg 1 -lvl 3 -x 820 -y 370 -defaultsOSRD
 preplace inst microblaze_0_local_memory -pg 1 -lvl 4 -x 1250 -y 380 -defaultsOSRD
-preplace inst mdm_1 -pg 1 -lvl 2 -x 380 -y 370 -defaultsOSRD
+preplace inst mdm_1 -pg 1 -lvl 2 -x 390 -y 370 -defaultsOSRD
 preplace inst clk_wiz_1 -pg 1 -lvl 1 -x 110 -y 590 -defaultsOSRD
-preplace inst rst_clk_wiz_1_100M -pg 1 -lvl 2 -x 380 -y 540 -defaultsOSRD
+preplace inst rst_clk_wiz_1_100M -pg 1 -lvl 2 -x 390 -y 540 -defaultsOSRD
 preplace inst microblaze_0_axi_periph -pg 1 -lvl 4 -x 1250 -y 140 -defaultsOSRD
-preplace inst axi_uartlite_0 -pg 1 -lvl 5 -x 1540 -y 310 -defaultsOSRD
-preplace inst axi_0 -pg 1 -lvl 5 -x 1540 -y 160 -defaultsOSRD
-preplace netloc microblaze_0_Clk 1 1 4 200 640 560 460 1070 290 1400
+preplace inst axi_uartlite_0 -pg 1 -lvl 5 -x 1550 -y 310 -defaultsOSRD
+preplace inst axi_0 -pg 1 -lvl 5 -x 1550 -y 160 -defaultsOSRD
+preplace netloc microblaze_0_Clk 1 1 4 200 640 570 460 1070 290 1400
 preplace netloc clk_wiz_1_locked 1 1 1 210 580n
-preplace netloc rst_clk_wiz_1_100M_mb_reset 1 2 1 570 400n
+preplace netloc rst_clk_wiz_1_100M_mb_reset 1 2 1 580 400n
 preplace netloc rst_clk_wiz_1_100M_bus_struct_reset 1 2 2 N 520 1100J
-preplace netloc mdm_1_debug_sys_rst 1 1 2 210 440 550
+preplace netloc mdm_1_debug_sys_rst 1 1 2 210 440 560
 preplace netloc sys_clock_1 1 0 1 NJ 600
-preplace netloc reset_1 1 0 2 20 520 NJ
+preplace netloc reset_1 1 0 2 10 520 NJ
 preplace netloc rst_clk_wiz_1_100M_peripheral_aresetn 1 2 3 NJ 580 1090 460 1430
-preplace netloc axi_0_MOSI 1 5 1 N 170
-preplace netloc axi_0_SCLK 1 5 1 N 150
+preplace netloc axi_0_MOSI 1 5 1 1680 130n
+preplace netloc axi_0_SCLK 1 5 1 1670 130n
 preplace netloc MISO_0_1 1 0 5 NJ 150 NJ 150 NJ 150 1080J 280 1420J
-preplace netloc microblaze_0_dlmb_1 1 3 1 N 350
-preplace netloc microblaze_0_ilmb_1 1 3 1 N 370
+preplace netloc axi_0_done 1 5 1 N 170
+preplace netloc axi_0_CS 1 5 1 N 190
 preplace netloc microblaze_0_debug 1 2 1 N 360
+preplace netloc microblaze_0_ilmb_1 1 3 1 N 370
+preplace netloc microblaze_0_dlmb_1 1 3 1 N 350
 preplace netloc microblaze_0_M_AXI_DP 1 3 1 1060 60n
+preplace netloc microblaze_0_axi_periph_M00_AXI 1 4 1 N 130
 preplace netloc microblaze_0_axi_periph_M01_AXI 1 4 1 1410 150n
 preplace netloc axi_uartlite_0_UART 1 5 1 N 300
-preplace netloc microblaze_0_axi_periph_M00_AXI 1 4 1 N 130
-levelinfo -pg 1 0 110 380 820 1250 1540 1670
-pagesize -pg 1 -db -bbox -sgen -120 0 1780 660
+levelinfo -pg 1 -10 110 390 820 1250 1550 1700
+pagesize -pg 1 -db -bbox -sgen -130 0 1820 660
 "
 }
 {

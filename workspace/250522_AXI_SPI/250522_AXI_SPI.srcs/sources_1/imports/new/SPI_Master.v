@@ -16,7 +16,6 @@ module SPI_Master #(
     output reg       ready,
     input            slave_sel,
     //external port
-    input      [1:0] sw,
     output           SCLK,
     output           MOSI,
     input            MISO,
