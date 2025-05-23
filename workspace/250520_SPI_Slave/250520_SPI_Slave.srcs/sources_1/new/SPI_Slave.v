@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module SPI_Slave (
+module SPI_Slave ( 
     input  clk,
     input  reset,
     input  SCLK,
@@ -9,7 +9,6 @@ module SPI_Slave (
     input  SS,
     input  done
 );
-
     wire [7:0] si_data;
     wire       si_done;
     wire [7:0] so_data;

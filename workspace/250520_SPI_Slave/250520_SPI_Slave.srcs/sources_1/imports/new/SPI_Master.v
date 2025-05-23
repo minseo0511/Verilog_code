@@ -1,6 +1,8 @@
 `timescale 1ns / 1ps
 
-module SPI_Master (
+module SPI_Master #(
+    parameter SLAVE_CS = 2
+) (
     // global signals
     input            clk,
     input            reset,
@@ -10,14 +12,14 @@ module SPI_Master (
     input            start,
     input      [7:0] tx_data,
     output     [7:0] rx_data,
-    output           done,
+    output 		     done,
     output reg       ready,
+    input            slave_sel,
     //external port
     output           SCLK,
     output           MOSI,
     input            MISO
 );
-
     localparam IDLE = 0, CP_DELAY = 1, CP0 = 2, CP1 = 3;
 
     reg [1:0] state, state_next;
@@ -25,20 +27,20 @@ module SPI_Master (
     reg [7:0] temp_rx_data_next, temp_rx_data_reg;
     reg [$clog2(50)-1:0] sclk_counter_next, sclk_counter_reg;
     reg [$clog2(7)-1:0] bit_counter_next, bit_counter_reg;
-
-    reg done_reg, done_next;
-
-    wire r_sclk;
-
+	reg done_reg, done_next;
+    reg start_reg, start_prev;
+	
+	wire r_sclk;
+	wire start_edge;
     assign MOSI = temp_tx_data_reg[7];
     assign rx_data = temp_rx_data_reg;
-    
     assign r_sclk = (state_next == CP1 && ~cpha) || (state_next == CP0 && cpha);
     assign SCLK = cpol ? ~r_sclk : r_sclk;
+	assign done = done_reg;
+	assign start_edge = (start_reg == 1) && (start_prev == 0);
 
-    assign done = done_reg;
-
-    always @(posedge clk, posedge reset) begin
+    // clocked logic
+    always @(posedge clk or posedge reset) begin
         if (reset) begin
             state <= IDLE;
             temp_tx_data_reg <= 0;
@@ -46,6 +48,8 @@ module SPI_Master (
             sclk_counter_reg <= 0;
             bit_counter_reg <= 0;
             done_reg <= 0;
+            start_reg <= 0;
+            start_prev <= 0;
         end else begin
             state <= state_next;
             temp_tx_data_reg <= temp_tx_data_next;
@@ -53,6 +57,8 @@ module SPI_Master (
             sclk_counter_reg <= sclk_counter_next;
             bit_counter_reg <= bit_counter_next;
             done_reg <= done_next;
+            start_prev <= start_reg;
+            start_reg <= start;
         end
     end
 
@@ -61,34 +67,31 @@ module SPI_Master (
         temp_tx_data_next = temp_tx_data_reg;
         temp_rx_data_next = temp_rx_data_reg;
         ready             = 0;
-        done_next              = 0;
-        // r_sclk            = 0;
         sclk_counter_next = sclk_counter_reg;
         bit_counter_next  = bit_counter_reg;
+		done_next = done_reg;
         case (state)
             IDLE: begin
-                temp_rx_data_next = 0;
+                temp_tx_data_next = 0;
                 done_next              = 0;
                 ready             = 1;
-                if (start) begin
+                if (start_edge) begin
                     temp_tx_data_next = tx_data;
                     ready             = 0;
                     sclk_counter_next = 0;
                     bit_counter_next  = 0;
-                    state_next = cpha ? CP_DELAY : CP0;
+                    state_next        = cpha ? CP_DELAY : CP0;
                 end
             end
             CP_DELAY: begin
-                if(sclk_counter_reg == 49) begin
+                if (sclk_counter_reg == 49) begin
                     sclk_counter_next = 0;
                     state_next = CP0;
-                end
-                else begin
+                end else begin
                     sclk_counter_next = sclk_counter_reg + 1;
                 end
             end
             CP0: begin
-                // r_sclk = 0;
                 if (sclk_counter_reg == 49) begin
                     temp_rx_data_next = {temp_rx_data_reg[6:0], MISO};
                     sclk_counter_next = 0;
@@ -98,7 +101,6 @@ module SPI_Master (
                 end
             end
             CP1: begin
-                // r_sclk = 1;
                 if (sclk_counter_reg == 49) begin
                     if (bit_counter_reg == 7) begin
                         done_next       = 1;

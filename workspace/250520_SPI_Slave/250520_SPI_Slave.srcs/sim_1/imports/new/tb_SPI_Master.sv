@@ -49,6 +49,8 @@ module tb_SPI_Master ();
         #10;
         reset = 0;
 
+        for(int i=0;i<2;i=i+1) begin
+            
         repeat (3) @(posedge clk);
 
         // address byte
@@ -60,8 +62,8 @@ module tb_SPI_Master ();
         cpha = 0;
         SS = 0;
         @(posedge clk);
-        start = 0;
         wait (done == 1);
+        start = 0;
         @(posedge clk);
 
         // write data byte on 0x00 address
@@ -72,8 +74,8 @@ module tb_SPI_Master ();
         cpha = 0;
         SS = 0;
         @(posedge clk);
-        start = 0;
         wait (done == 1);
+        start = 0;
         @(posedge clk);
 
         // write data byte on 0x01 address
@@ -133,6 +135,7 @@ module tb_SPI_Master ();
         end
 
         SS = 1;
+    end
 
         #2000 $finish;
     end
