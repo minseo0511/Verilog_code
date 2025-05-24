@@ -7,30 +7,13 @@ module SPI_Slave (
     input MOSI,
     output MISO,
     input SS,
-    input done,
-    output SCLK_debug,
-    output MOSI_debug,
-    output MISO_debug,
-    output SS_debug,
-    output done_debug,
-    output [12:0] led
+    input done
 );
     wire [7:0] si_data;
     wire       si_done;
     wire [7:0] so_data;
     wire       so_start;
     wire       so_done;
-    wire [1:0] state_led;
-    wire si_led;
-    wire [1:0] so_led;
-
-    assign led   = {so_led, si_led, state_led, si_data};
-    assign MOSI_debug = MOSI;
-    assign MISO_debug = MISO;
-    assign SCLK_debug = SCLK;
-    assign done_debug = done;
-    assign SS_debug   = SS;
-
 
     SPI_Slave_Intf U_SPI_Slave_Intf (
         .clk     (clk),
@@ -43,9 +26,7 @@ module SPI_Slave (
         .si_done (si_done),
         .so_data (so_data),
         .so_start(so_start),
-        .so_done (so_done),
-        .si_led(si_led),
-        .so_led(so_led)
+        .so_done (so_done)
     );
 
     SPI_Slave_Reg U_SPI_Slave_Reg (
@@ -57,9 +38,7 @@ module SPI_Slave (
         .so_data  (so_data),
         .so_start (so_start),
         .so_done  (so_done),
-        .done     (done),
-        .state_led(state_led)
-        // input            so_ready
+        .done     (done)
     );
 
 endmodule
@@ -78,9 +57,7 @@ module SPI_Slave_Intf (
     output       si_done,
     input  [7:0] so_data,
     input        so_start,
-    output       so_done,
-    output       si_led,
-    output [1:0] so_led
+    output       so_done
 );
 
     reg sclk_sync0;
@@ -228,8 +205,7 @@ module SPI_Slave_Reg (
     output reg [7:0] so_data,
     output           so_start,
     input            so_done,
-    input            done,
-    output     [1:0] state_led
+    input            done
     // input            so_ready
 );
     localparam IDLE = 0, ADDR_PHASE = 1, WRITE_PHASE = 2, READ_PHASE = 3;
