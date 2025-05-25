@@ -1,8 +1,4 @@
-`timescale 1ns / 1ps
-
-module SPI_Master #(
-    parameter SLAVE_CS = 2
-) (
+module SPI_Master (
     // global signals
     input            clk,
     input            reset,
@@ -14,7 +10,6 @@ module SPI_Master #(
     output     [7:0] rx_data,
     output 		     done,
     output reg       ready,
-    input            slave_sel,
     //external port
     output           SCLK,
     output           MOSI,
@@ -29,6 +24,7 @@ module SPI_Master #(
     reg [$clog2(7)-1:0] bit_counter_next, bit_counter_reg;
 	reg done_reg, done_next;
     reg start_reg, start_prev;
+	reg done_flag;
 	
 	wire r_sclk;
 	wire start_edge;
@@ -36,9 +32,9 @@ module SPI_Master #(
     assign rx_data = temp_rx_data_reg;
     assign r_sclk = (state_next == CP1 && ~cpha) || (state_next == CP0 && cpha);
     assign SCLK = cpol ? ~r_sclk : r_sclk;
-	assign done = done_reg;
+	assign done = done_flag;
 	assign start_edge = (start_reg == 1) && (start_prev == 0);
-
+ 
     // clocked logic
     always @(posedge clk or posedge reset) begin
         if (reset) begin
@@ -50,6 +46,7 @@ module SPI_Master #(
             done_reg <= 0;
             start_reg <= 0;
             start_prev <= 0;
+			done_flag <= 0;
         end else begin
             state <= state_next;
             temp_tx_data_reg <= temp_tx_data_next;
@@ -59,6 +56,12 @@ module SPI_Master #(
             done_reg <= done_next;
             start_prev <= start_reg;
             start_reg <= start;
+			if(done_next) begin
+				done_flag <= 1'b1;
+			end
+			else if(start_edge) begin
+				done_flag <= 1'b0;
+			end
         end
     end
 

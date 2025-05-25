@@ -39,7 +39,7 @@ module tb_SPI_Master ();
         .MISO(MISO),
         .SS(SS),
         .done(done)
-    );
+    ); 
 
     always #5 clk = ~clk;
     initial begin
@@ -62,8 +62,9 @@ module tb_SPI_Master ();
         cpha = 0;
         SS = 0;
         @(posedge clk);
-        wait (done == 1);
         start = 0;
+        @(posedge clk);
+        wait (done == 1);
         @(posedge clk);
 
         // write data byte on 0x00 address
@@ -74,8 +75,9 @@ module tb_SPI_Master ();
         cpha = 0;
         SS = 0;
         @(posedge clk);
-        wait (done == 1);
         start = 0;
+        @(posedge clk);
+        wait (done == 1);
         @(posedge clk);
 
         // write data byte on 0x01 address
@@ -87,6 +89,7 @@ module tb_SPI_Master ();
         SS = 0;
         @(posedge clk);
         start = 0;
+        @(posedge clk);
         wait (done == 1);
         @(posedge clk);
         
@@ -99,6 +102,7 @@ module tb_SPI_Master ();
         SS = 0;
         @(posedge clk);
         start = 0;
+        @(posedge clk);
         wait (done == 1);
         @(posedge clk);
 
@@ -111,6 +115,7 @@ module tb_SPI_Master ();
         SS = 0;
         @(posedge clk);
         start = 0;
+        @(posedge clk);
         wait (done == 1);
         @(posedge clk);
 
@@ -122,6 +127,7 @@ module tb_SPI_Master ();
         tx_data = 8'b00000000; start = 1; cpol = 0; cpha = 0; 
         @(posedge clk);
         start = 0;
+        @(posedge clk);
         wait(done == 1);
         @(posedge clk);
         @(posedge clk);
@@ -129,6 +135,7 @@ module tb_SPI_Master ();
             tx_data = 8'b00000000; start = 1; 
             @(posedge clk);
             start = 0;
+            @(posedge clk);    
             wait(done == 1);
             @(posedge clk);    
             @(posedge clk);    
