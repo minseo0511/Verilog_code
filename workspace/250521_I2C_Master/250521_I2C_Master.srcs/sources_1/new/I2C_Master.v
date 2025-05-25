@@ -174,6 +174,7 @@ module I2C_Master(
                 tx_done_next = 1'b0;
                 if(clk_count_reg == 249) begin
                     clk_count_next = 0;
+                    I2C_en_next = 1'b0;
                     state_next = ACK2;
                 end
                 else begin
@@ -193,7 +194,6 @@ module I2C_Master(
             ACK3: begin
                 SCL = 1;
                 if(SDA == 0) begin
-                    I2C_en_next = 1'b0;
                 end
                 else begin
                     I2C_en_next = 1'b0;
