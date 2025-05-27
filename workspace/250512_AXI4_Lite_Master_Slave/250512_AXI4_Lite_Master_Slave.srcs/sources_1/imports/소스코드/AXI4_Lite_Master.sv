@@ -134,6 +134,7 @@ module AXI4_Lite_Master (
                 BREADY = 1'b0;
                 w_ready  = 1'b0;
                 if (WVALID) begin
+                    BREADY = 1'b1;
                     b_state_next = B_READY_S;
                 end
             end

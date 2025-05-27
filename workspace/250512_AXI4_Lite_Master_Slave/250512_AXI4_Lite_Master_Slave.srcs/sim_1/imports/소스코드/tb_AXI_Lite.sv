@@ -95,7 +95,7 @@ module tb_AXI_Lite();
         #1; transfer = 0;
         wait(ready == 1);
 
-        #200;
+        #20;
         $finish;
     end
 endmodule
