@@ -9,10 +9,10 @@ module Image_Rom (
     output logic [3:0] blue_port
 );
 
-    logic [18:0] image_addr;
+    logic [16:0] image_addr;
     logic [15:0] image_data; // RGB565 => 16'b rrrrr gggggg bbbbb 상위 4bit 씩 사용
 
-    assign image_addr = (640 * y_pixel) + x_pixel;
+    assign image_addr = (320 * y_pixel) + x_pixel;
     assign {red_port, green_port, blue_port} = DE ? {image_data[15:12], image_data[10:7], image_data[4:1]} : 12'b0;
 
     rom U_rom(
@@ -23,11 +23,11 @@ module Image_Rom (
 endmodule
 
 module rom (
-    input  logic [18:0] addr,
+    input  logic [16:0] addr,
     output logic [15:0] data
 );
 
-    logic [15:0] rom[0:640*480-1];
+    logic [15:0] rom[0:320*240-1];
 
     assign data = rom[addr];
 endmodule
