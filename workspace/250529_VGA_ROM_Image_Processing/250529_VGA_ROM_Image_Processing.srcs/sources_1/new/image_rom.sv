@@ -12,13 +12,22 @@ module Image_Rom (
     logic [16:0] image_addr;
     logic [15:0] image_data; // RGB565 => 16'b rrrrr gggggg bbbbb 상위 4bit 씩 사용
 
-    assign image_addr = (320 * y_pixel) + x_pixel;
-    assign {red_port, green_port, blue_port} = DE ? {image_data[15:12], image_data[10:7], image_data[4:1]} : 12'b0;
+    assign image_addr = (320 * (y_pixel)) + (x_pixel);
+    // assign {red_port, green_port, blue_port} = DE ? {image_data[15:12], image_data[10:7], image_data[4:1]} : 12'b0;
 
     rom U_rom(
         .addr(image_addr),
         .data(image_data)
     );    
+
+    always_comb begin
+        if((x_pixel >= 320) || (y_pixel >= 240)) begin
+            {red_port, green_port, blue_port} = 12'b0;
+        end
+        else begin
+            {red_port, green_port, blue_port} = DE ? {image_data[15:12], image_data[10:7], image_data[4:1]} : 12'b0;
+        end
+    end
 
 endmodule
 
@@ -28,6 +37,10 @@ module rom (
 );
 
     logic [15:0] rom[0:320*240-1];
+
+    initial begin
+        $readmemh("minseo.mem", rom); // h면 hex
+    end
 
     assign data = rom[addr];
 endmodule
