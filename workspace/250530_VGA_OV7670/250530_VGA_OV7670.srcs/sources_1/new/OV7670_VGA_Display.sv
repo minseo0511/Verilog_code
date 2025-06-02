@@ -11,7 +11,7 @@ module OV7670_VGA_Display (
     input logic ov7670_v_sync,
     input logic [7:0] ov7670_data,
     // export signals
-    input logic [4:0] sw,
+    input logic [5:0] sw,
     output logic h_sync,
     output logic v_sync,
     output logic [3:0] red_port,
@@ -56,8 +56,8 @@ module OV7670_VGA_Display (
         .wData(wData),
         .rclk (rclk),
         .oe   (d_en),
-        .rAddr(rAddr),
-        .rData(rData)
+        .rAddr(rAddr_RAM),
+        .rData(rData_RAM)
     );
 
     VGA_Controller U_VGA_Controller (
@@ -72,7 +72,7 @@ module OV7670_VGA_Display (
     );
 
     QVGA_MemController U_QVGA_MemController (
-        .sw        (sw[4]),
+        .sw        (sw[5:4]),
         .clk       (w_rclk),
         .x_pixel   (x_pixel),
         .y_pixel   (y_pixel),
