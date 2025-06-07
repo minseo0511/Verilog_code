@@ -67,10 +67,12 @@ module QVGA_MemController (
             end else begin
                 {red_port, green_port, blue_port} = rData;
             end
+            if(text_pixel) begin
+                {red_port,green_port,blue_port} = 12'h00F; //Text Colour
+            end
         end else begin
             {red_port, green_port, blue_port} = 12'd0;  // 검정색으로 출력
         end
-        if(text_pixel) {red_port,green_port,blue_port} = 12'h00F; //Text Colour
     end
 endmodule
 

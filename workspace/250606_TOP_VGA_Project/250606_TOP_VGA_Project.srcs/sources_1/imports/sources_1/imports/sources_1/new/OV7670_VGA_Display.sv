@@ -22,11 +22,14 @@ module OV7670_VGA_Display (
     input logic [5:0] sw,
     output logic h_sync,
     output logic v_sync,
+    output logic h_sync_debug,
+    output logic v_sync_debug,
     output logic [3:0] red_port,
     output logic [3:0] green_port,
     output logic [3:0] blue_port,
-    output logic SCL_debug,
-    output logic SDA_debug,
+    output logic DE_debug,
+    output logic ov7670_href_debug,
+    output logic ov7670_v_sync_debug,
 
     //additional
     output logic out_text_en
@@ -43,6 +46,8 @@ module OV7670_VGA_Display (
     logic btn_start;
     logic clk_100Mhz, clk_25Mhz;
     logic en;
+    logic locked;
+    logic system_reset;
 
     logic [11:0] rData, rData_real, rData_diff1, rData_diff2, motion_diff_red;
     logic [11:0] interpol1, interpol2, Gray_diff1, Gray_diff2;
@@ -53,23 +58,31 @@ module OV7670_VGA_Display (
 
     //additional
     logic text_en;
+
     assign out_text_en = text_en;
 
     // assign red_port   = sw[3] ? red_gray   : red_filter; 
     // assign green_port = sw[3] ? green_gray : green_filter; 
     // assign blue_port  = sw[3] ? blue_gray  : blue_filter; 
 
-    assign SCL_debug = SCL;
-    assign SDA_debug = SDA;
-
     assign w_rclk = clk_100Mhz;
 
     assign ov7670_xclk = clk_25Mhz;
 
+    // assign system_reset = reset | ~locked;
+
+    assign h_sync_debug = h_sync;
+    assign v_sync_debug = v_sync;
+    assign DE_debug = DE;
+    assign ov7670_href_debug = ov7670_href;
+    assign ov7670_v_sync_debug = ov7670_v_sync;
+
+
     // Clocking Wizard (MMCM)
-    clk_wiz_1 U_clk_wiz_1(
+    clk_wiz_2 U_clk_wiz_2(
         .clk_in1(clk),
         .reset(reset),
+        .locked(locked),
         .clk_100Mhz(clk_100Mhz),
         .clk_25Mhz(clk_25Mhz)
     );
@@ -121,25 +134,11 @@ module OV7670_VGA_Display (
     // ISP
     // Grayscale 필터
     Gray_filtering U_Gray_filtering(
-        .rData_diff1(rData_diff1), //rData_diff1
-        .rData_diff2(rData_diff2), //rData_diff2
+        .rData_diff1(rData_diff1), 
+        .rData_diff2(rData_diff2), 
         .Gray_diff1(Gray_diff1),
         .Gray_diff2(Gray_diff2)
     );
-
-    // // Sobel filter
-    // sobel_filter_top U_sobel_filter_top(
-    //     .clk(clk_25Mhz),
-    //     .reset(reset),
-    //     // .threshold(threshold),
-    //     .g_filter_diff1(Gray_diff1),
-    //     .g_filter_diff2(Gray_diff2),
-    //     .DE(DE),
-    //     .x_pixel(x_pixel),
-    //     .y_pixel(y_pixel),
-    //     .sobel_out1(sobel_out1),
-    //     .sobel_out2(sobel_out2)
-    // );
 
     Mopology_Filter_TOP U_Mopology_Filter_TOP(
         .clk(clk_25Mhz),
@@ -194,7 +193,7 @@ module OV7670_VGA_Display (
 
     // VGA 컨트롤러
     VGA_Controller U_VGA_Controller (
-        .clk    (clk_25Mhz),       // 수정됨
+    .clk    (clk_25Mhz),       // 수정됨
         .reset  (reset),
         .h_sync (h_sync),
         .v_sync (v_sync),

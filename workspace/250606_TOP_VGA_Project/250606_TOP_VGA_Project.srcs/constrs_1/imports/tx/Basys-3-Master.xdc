@@ -65,18 +65,18 @@ set_property -dict { PACKAGE_PIN R2    IOSTANDARD LVCMOS33 } [get_ports threshol
 ##Buttons
 set_property -dict { PACKAGE_PIN U18   IOSTANDARD LVCMOS33 } [get_ports reset]
 set_property -dict { PACKAGE_PIN T18   IOSTANDARD LVCMOS33 } [get_ports start]
-#set_property -dict { PACKAGE_PIN W19   IOSTANDARD LVCMOS33 } [get_ports btnL]
+# set_property -dict { PACKAGE_PIN W19   IOSTANDARD LVCMOS33 } [get_ports game_start]
 #set_property -dict { PACKAGE_PIN T17   IOSTANDARD LVCMOS33 } [get_ports btnR]
 #set_property -dict { PACKAGE_PIN U17   IOSTANDARD LVCMOS33 } [get_ports btnD]
 
 
 ##Pmod Header JA
-set_property -dict { PACKAGE_PIN J1   IOSTANDARD LVCMOS33 } [get_ports SCL_debug];#Sch name = JA1
-set_property -dict { PACKAGE_PIN L2   IOSTANDARD LVCMOS33 } [get_ports SDA_debug];#Sch name = JA2
+set_property -dict { PACKAGE_PIN J1   IOSTANDARD LVCMOS33 } [get_ports ov7670_href_debug];#Sch name = JA1
+set_property -dict { PACKAGE_PIN L2   IOSTANDARD LVCMOS33 } [get_ports ov7670_v_sync_debug];#Sch name = JA2
 set_property -dict { PACKAGE_PIN J2   IOSTANDARD LVCMOS33 } [get_ports out_text_en];#Sch name = JA3
-# set_property -dict { PACKAGE_PIN G2   IOSTANDARD LVCMOS33 } [get_ports motion_pixel_count[0]];#Sch name = JA4
-#set_property -dict { PACKAGE_PIN H1   IOSTANDARD LVCMOS33 } [get_ports {JA[4]}];#Sch name = JA7
-#set_property -dict { PACKAGE_PIN K2   IOSTANDARD LVCMOS33 } [get_ports {JA[5]}];#Sch name = JA8
+set_property -dict { PACKAGE_PIN G2   IOSTANDARD LVCMOS33 } [get_ports DE_debug];#Sch name = JA4
+set_property -dict { PACKAGE_PIN H1   IOSTANDARD LVCMOS33 } [get_ports h_sync_debug];#Sch name = JA7
+set_property -dict { PACKAGE_PIN K2   IOSTANDARD LVCMOS33 } [get_ports v_sync_debug];#Sch name = JA8
 #set_property -dict { PACKAGE_PIN H2   IOSTANDARD LVCMOS33 } [get_ports {JA[6]}];#Sch name = JA9
 #set_property -dict { PACKAGE_PIN G3   IOSTANDARD LVCMOS33 } [get_ports dht_IO];#Sch name = JA10
 
@@ -146,6 +146,36 @@ set_property -dict { PACKAGE_PIN R19   IOSTANDARD LVCMOS33 } [get_ports v_sync]
 #set_property -dict { PACKAGE_PIN G18   IOSTANDARD LVCMOS33 } [get_ports {QspiDB[2]}]
 #set_property -dict { PACKAGE_PIN F18   IOSTANDARD LVCMOS33 } [get_ports {QspiDB[3]}]
 #set_property -dict { PACKAGE_PIN K19   IOSTANDARD LVCMOS33 } [get_ports QspiCSn]
+
+# RED
+set_property DRIVE 8 [get_ports red_port[0]]
+set_property SLEW FAST [get_ports red_port[0]]
+set_property DRIVE 8 [get_ports red_port[1]]
+set_property SLEW FAST [get_ports red_port[1]]
+set_property DRIVE 8 [get_ports red_port[2]]
+set_property SLEW FAST [get_ports red_port[2]]
+set_property DRIVE 8 [get_ports red_port[3]]
+set_property SLEW FAST [get_ports red_port[3]]
+
+# GREEN
+set_property DRIVE 8 [get_ports green_port[0]]
+set_property SLEW FAST [get_ports green_port[0]]
+set_property DRIVE 8 [get_ports green_port[1]]
+set_property SLEW FAST [get_ports green_port[1]]
+set_property DRIVE 8 [get_ports green_port[2]]
+set_property SLEW FAST [get_ports green_port[2]]
+set_property DRIVE 8 [get_ports green_port[3]]
+set_property SLEW FAST [get_ports green_port[3]]
+
+# BLUE
+set_property DRIVE 8 [get_ports blue_port[0]]
+set_property SLEW FAST [get_ports blue_port[0]]
+set_property DRIVE 8 [get_ports blue_port[1]]
+set_property SLEW FAST [get_ports blue_port[1]]
+set_property DRIVE 8 [get_ports blue_port[2]]
+set_property SLEW FAST [get_ports blue_port[2]]
+set_property DRIVE 8 [get_ports blue_port[3]]
+set_property SLEW FAST [get_ports blue_port[3]]
 
 
 ## Configuration options, can be used for all designs
